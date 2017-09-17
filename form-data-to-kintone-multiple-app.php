@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: kintone form Multiple APP
+ * Plugin Name: Form data to kintone Multiple APP
  * Plugin URI:  
  * Description: This plugin is an addon for "kintone form".
  * Version:	 1.0.0
