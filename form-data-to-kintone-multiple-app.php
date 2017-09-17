@@ -70,7 +70,7 @@ class KintoneFormMultipleApp {
 		);
 
 		if ( is_admin() ) {
-		    new BFIGitHubPluginUpdater( __FILE__, 'tkc49', "form-data-to-kintone-multiole-app" );
+		    new BFIGitHubPluginUpdater( __FILE__, 'tkc49', "form-data-to-kintone-multiple-app" );
 		}		
 
 
