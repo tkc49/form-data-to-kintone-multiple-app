@@ -1,6 +1,6 @@
 <?php
 
-class BFIGitHubPluginUpdater {
+class FormDataToKintoneMultiAppBFIGitHubPluginUpdater {
 
     private $slug; // plugin slug
     private $pluginData; // plugin data

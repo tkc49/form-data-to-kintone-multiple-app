@@ -36,7 +36,7 @@ define( 'KINTONE_FORM_MULTIPLE_APP_PATH', dirname( __FILE__ ) );
 $KintoneFormMultipleApp = new KintoneFormMultipleApp();
 $KintoneFormMultipleApp->register();
 
-require_once( KINTONE_FORM_MULTIPLE_APP_PATH . '/inc/BFIGitHubPluginUploader.php' );
+require_once( KINTONE_FORM_MULTIPLE_APP_PATH . '/inc/FormDataToKintoneMultiAppBFIGitHubPluginUpdater.php' );
 
 
 class KintoneFormMultipleApp {
@@ -70,7 +70,7 @@ class KintoneFormMultipleApp {
 		);
 
 		if ( is_admin() ) {
-		    new BFIGitHubPluginUpdater( __FILE__, 'tkc49', "form-data-to-kintone-multiple-app" );
+		    new FormDataToKintoneMultiAppBFIGitHubPluginUpdater( __FILE__, 'tkc49', "form-data-to-kintone-multiple-app" );
 		}		
 
 
