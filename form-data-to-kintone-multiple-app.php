@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Form data to kintone Multiple APP
- * Plugin URI:  
+ * Plugin URI:
  * Description: This plugin is an addon for "kintone form".
- * Version:	 1.0.1
- * Author:	  Takashi Hosoya
+ * Version:     1.0.2
+ * Author:      Takashi Hosoya
  * Author URI:  http://ht79.info/
- * License:	 GPLv2 
+ * License:     GPLv2
  * Text Domain: kintone-form-multiple-app
  * Domain Path: /languages
  */
@@ -29,14 +29,13 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-define( 'KINTONE_FORM_MULTIPLE_APP_URL',  plugins_url( '', __FILE__ ) );
+define( 'KINTONE_FORM_MULTIPLE_APP_URL', plugins_url( '', __FILE__ ) );
 define( 'KINTONE_FORM_MULTIPLE_APP_PATH', dirname( __FILE__ ) );
 
 
 $KintoneFormMultipleApp = new KintoneFormMultipleApp();
 $KintoneFormMultipleApp->register();
 
-require_once( KINTONE_FORM_MULTIPLE_APP_PATH . '/inc/FormDataToKintoneMultiAppBFIGitHubPluginUpdater.php' );
 
 
 class KintoneFormMultipleApp {
@@ -44,43 +43,37 @@ class KintoneFormMultipleApp {
 	private $version = '';
 	private $langs   = '';
 	private $nonce   = 'kintone_form_multiple_app_';
-		
-	function __construct()
-	{
-		$data = get_file_data(
+
+	function __construct() {
+		$data          = get_file_data(
 			__FILE__,
 			array( 'ver' => 'Version', 'langs' => 'Domain Path' )
 		);
 		$this->version = $data['ver'];
 		$this->langs   = $data['langs'];
-		
+
 	}
 
-	public function register()
-	{
+	public function register() {
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 1 );
 	}
 
-	public function plugins_loaded()
-	{
+	public function plugins_loaded() {
 		load_plugin_textdomain(
 			'kintone-form-multiple-app',
 			false,
-			dirname( plugin_basename( __FILE__ ) ).$this->langs
+			dirname( plugin_basename( __FILE__ ) ) . $this->langs
 		);
 
-		if ( is_admin() ) {
-		    new FormDataToKintoneMultiAppBFIGitHubPluginUpdater( __FILE__, 'tkc49', "form-data-to-kintone-multiple-app" );
-		}		
 
 
 		add_action( 'kintone_form_setting_panel_after', array( $this, 'kintone_form_setting_panel_after' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'kintone_form_do_admin_enqueue_scripts' ) );
 
-		
+
 	}
 
-	public function kintone_form_setting_panel_after(){
+	public function kintone_form_setting_panel_after() {
 
 		$html = '';
 		$html .= '<table class="template row" style="margin-bottom: 30px; border-top: 6px solid #ccc; width: 100%;">';
@@ -88,16 +81,17 @@ class KintoneFormMultipleApp {
 		$html .= '		<td valign="top" style="padding: 10px 0px;">';
 		$html .= '			APP ID:<input type="text" id="kintone-form-appid" name="kintone_setting_data[app_datas][{{row-count-placeholder}}][appid]" class="small-text" size="70" value="" />';
 		$html .= '			Api Token:<input type="text" id="kintone-form-token" name="kintone_setting_data[app_datas][{{row-count-placeholder}}][token]" class="regular-text" size="70" value="" />';
+		$html .= '			<input type="submit" class="button-primary" name="get-kintone-data" value="GET">';
 		$html .= '		</td>';
 		$html .= '		<td width="10%"><span class="remove button">Remove</span></td>';
 		$html .= '	</tr>';
-		$html .= '</table>';		
+		$html .= '</table>';
 
 		echo $html;
 
 	}
 
-	public function kintone_form_do_admin_enqueue_scripts(){
+	public function kintone_form_do_admin_enqueue_scripts() {
 
 		wp_enqueue_script(
 			'repeatable-fields',
